@@ -10,3 +10,8 @@
   --text-search: 600 24px/auto var(--font-family);
   --text-account: 600 15px/auto var(--font-family)
 }
+
+body img {
+  position: sticky;
+  width: auto;
+}
