@@ -1,6 +1,7 @@
 * {
   margin: 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 :root {
@@ -11,7 +12,30 @@
   --text-account: 600 15px/auto var(--font-family)
 }
 
-body img {
-  position: sticky;
-  width: auto;
+body {
+  background-image: url("../assets/background-1.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  position: relative;
+  /* Isso é essencial para posicionar o pseudo-elemento */
+}
+
+/* Cria o pseudo-elemento para a imagem de fundo */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/background-1.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  filter: blur(1.5px);
+  /* Ajuste o valor '5px' para mais ou menos desfoque */
+  z-index: -1;
+  /* Coloca o pseudo-elemento atrás do conteúdo */
 }
