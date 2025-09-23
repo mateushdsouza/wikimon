@@ -1,0 +1,36 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 26px;
+}
+
+#logo {
+  width: 180px;
+  height: 160px;
+}
+
+.search {
+  display: flex;
+  width: 600px;
+  height: 66px;
+  align-items: center;
+  max-width: 600px;
+  border-radius: 20px;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.65);
+  background-color: #f3edf7;
+}
+
+.search input {
+  border: none;
+  flex-grow: 1;
+  background: transparent;
+  outline: none;
+  font-size: 22px;
+  color: #333;
+}
+
+.search button {
+  border: none;
+  padding: 10px;
+}
