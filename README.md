@@ -28,3 +28,5 @@
 
 📚 Sobre o projeto
 Este projeto foi desenvolvido como parte de uma disciplina da faculdade para demonstrar habilidades em desenvolvimento web, organização de dados e criação de interfaces amigáveis. É uma forma prática de unir paixão por Pokémon com aprendizado tecnológico.
+
+Link do figma: https://www.figma.com/design/iKTkCZqIRtZ497VtETy3nv/wikimon?node-id=0-1&t=jGY4APEfOSzzwaLH-1
