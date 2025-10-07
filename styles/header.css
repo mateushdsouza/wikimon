@@ -10,6 +10,11 @@ header {
   height: 160px;
 }
 
+nav {
+  display: flex;
+  gap: 20px;
+}
+
 .search {
   display: flex;
   width: 600px;
@@ -38,4 +43,14 @@ header {
 .search img {
   width: 24px;
   height: 24px;
+}
+
+.options {
+  background: #f3edf7;
+  border: none;
+  width: 100%;
+  max-width: 25px;
+  height: 70px;
+  border-radius: 20px;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.65);
 }

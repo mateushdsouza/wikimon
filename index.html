@@ -19,11 +19,21 @@
     <a id="logo" href="#">
       <img src="assets/header/Logo.png" alt="Pokebola escrito WIKIMON;">
     </a>
-    <div class="search">
-      <button type="submit"><img src="assets/header/magnifying-glass.svg" alt="Icone de pesquisa"></button>
-      <input type="text" name="search" id="search">
-    </div>
-    <p>&#x22EE;</p>
+
+    <nav>
+      <form class="search" role="search">
+        <button type="submit" aria-label="Pesquisar">
+          <img src="assets/header/magnifying-glass.svg" alt="Ícone de lupa.">
+        </button>
+        <input type="text" name="search" id="search" placeholder="Pesquisar Pokémon por nome ou ID"
+          aria-label="Campo de pesquisa">
+      </form>
+
+      <button class="options" aria-label="Opções adicionais">
+        &#x22EE;
+      </button>
+    </nav>
+
     <div class="account">
       <img src="assets/header/account.svg" alt="Icone de conta">
     </div>
