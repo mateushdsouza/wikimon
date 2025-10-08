@@ -17,6 +17,7 @@ nav {
   justify-content: center;
   width: 600px;
   height: 100px;
+  font-family: var(--font-family);
 }
 
 nav>button {
@@ -33,7 +34,7 @@ nav>button {
 .options {
   display: flex;
 
-  color: var(--text-search);
+  font: var(--text-search);
   background-color: #f3edf7;
   border: none;
   border-radius: 20px;
@@ -46,7 +47,28 @@ nav>button {
 
 .options>a {
   text-decoration: none;
-  color: var(--text-search);
+  color: var(--text-color);
   font-weight: bold;
-  font-size: 18px;
+  font-size: 22px;
+  font-family: var(--font-family);
+
+  display: inline;
+  padding: 10px 15px;
+}
+
+.options>a:hover {
+  color: #7b68ee;
+  transition: 0.3s;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3edf7;
+  width: 65px;
+  height: 65px;
+  border-radius: 20px;
+  padding: 16px;
+  margin-right: 52px;
 }
