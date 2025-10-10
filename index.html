@@ -30,10 +30,19 @@
       </div>
     </nav>
 
-    <div class="account">
-      <img src="assets/header/account.svg" alt="Icone de conta">
+    <div class="dropdown-menu">
+      <button id="accountToggle" class="account" aria-expanded="false" aria-controls="accountMenu">
+        <img src="assets/header/account.svg" alt="Icone de conta">
+      </button>
+
+      <div id="accountMenu" class="dropdown-content" role="menu" aria-labelledby="accountToggle">
+        <a href="">Login</a>
+        <a href="">Cadastrar</a>
+      </div>
+
     </div>
   </header>
+  <script src="scripts/dropdown-menu.js"></script>
 </body>
 
 </html>

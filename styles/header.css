@@ -57,18 +57,21 @@ nav>button {
 }
 
 .options>a:hover {
-  color: #7b68ee;
+  color: #ee6868;
   transition: 0.3s;
 }
 
 .account {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   background-color: #f3edf7;
   width: 65px;
   height: 65px;
   border-radius: 20px;
-  padding: 16px;
+  padding: 0;
   margin-right: 52px;
+  border: none;
+  box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.65);
+  cursor: pointer;
 }
