@@ -21,13 +21,20 @@
     </a>
 
     <nav>
-      <button><img src="assets/header/magnifying-glass.svg" alt="Icone de Pesquisa"></button>
+
+      <button id="searchToggle" class="search-bar search-toggle-collapsed">
+        <img class="search-icon" src="assets/header/magnifying-glass.svg" alt="Icone de Pesquisa">
+        <input id="searchInput" class="search-input" type="text" placeholder="Pesquisar..." autocomplete="off" />
+      </button>
 
       <div class="options">
         <a href="">Comparar</a>
         <a href="">Lista</a>
         <a href="">Favoritos</a>
       </div>
+      <button id="optionsToggle" class="options-toggle" style="display: none;">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </button>
     </nav>
 
     <div class="dropdown-menu">
@@ -43,6 +50,7 @@
     </div>
   </header>
   <script src="scripts/dropdown-menu.js"></script>
+  <script src="scripts/search-effect.js"></script>
 </body>
 
 </html>
