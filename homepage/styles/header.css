@@ -28,6 +28,7 @@ header {
 }
 
 .search-icon {
+  border: none;
   width: 32px;
   height: 32px;
   margin-right: 8px;
