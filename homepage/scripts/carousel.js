@@ -3,11 +3,11 @@ let pokemonData = [];
 const NUM_CARDS_IN_DOM = 4;
 const VISIBLE_CENTER_INDEX = 1;
 // Novo: Define o máximo de IDs de Pokémon. Usando 1025 para abranger a maioria dos Pokémon existentes.
-const MAX_POKEMON_ID = 1025; 
+const MAX_POKEMON_ID = 500; 
 
 // Variável global para armazenar o ID do intervalo do carrossel
 let carouselIntervalId = null; 
-const ROTATION_TIME = 5000; // 5 segundos entre cada rotação
+const ROTATION_TIME = 3000; // 3 segundos entre cada rotação
 
 // NOVA FUNÇÃO: Gera um ID de Pokémon aleatório entre 1 e MAX_POKEMON_ID
 function getRandomPokemonId() {
