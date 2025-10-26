@@ -1,71 +1,65 @@
+/* =====================================================
+   MAIN.CSS - VERSÃO CORRIGIDA CARROSSEL
+   Substitua o conteúdo do seu main.css por este
+   ===================================================== */
+
 .carousel-container {
     width: 80vw;
     max-width: 950px;
     margin: 50px auto;
-    overflow: hidden;
+    overflow: hidden; /* IMPORTANTE: esconde cards extras */
     position: relative;
 }
 
 .carousel-track {
     display: flex;
     align-items: center;
-    /* CORREÇÃO/OTIMIZAÇÃO: Adicionar todas as propriedades que mudam na transição 
-       para garantir a suavidade no movimento (transform e margin para o JS) */
-    transition: transform 0.5s ease-in-out; 
+    transition: transform 0.5s ease-in-out;
+    justify-content: flex-start; /* NOVO: alinha à esquerda */
 }
 
 /* ----------------------------------------------------- */
-/* NOVO CSS PARA TRATAR O LINK <a> COMO UM ITEM DO CARROSSEL */
-/* ----------------------------------------------------- */
+/* LINKS DO CARROSSEL (tags <a>) - DESKTOP PADRÃO
+   ===================================================== */
 .carousel-track a {
     text-decoration: none;
     color: inherit;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    /* CORREÇÃO/OTIMIZAÇÃO: Adicionar as propriedades que mudam 
-       (transform, opacity, min-width, height, margin) para a transição. */
+    flex-shrink: 0; /* IMPORTANTE: não permite comprimir */
     transition: all 0.5s ease-in-out; 
     
-    margin: 0 10px; /* Espaçamento entre cards */
-
-    /* Largura e altura base (no <a>) */
+    margin: 0 10px;
     min-width: 280px;
+    max-width: 280px; /* NOVO: limita largura máxima */
     height: 350px;
-
-    /* Aplica a transformação de escala e opacidade base */
+    
     transform: scale(0.9);
     opacity: 0.7;
 }
 
+/* CARD CENTRAL - DESKTOP */
 .carousel-track a.center {
-    /* Estado Central: O card é maior e mais focado. */
     transform: scale(1.0);
-    
-    /* CORREÇÃO/OTIMIZAÇÃO: Use 'width' no card central para garantir 
-       que ele seja maior e forçar os vizinhos a se afastarem com o 'margin' */
     min-width: 350px;
-    height: 450px; /* Altura maior no elemento central */
-    
+    max-width: 350px; /* NOVO: limita largura máxima */
+    height: 450px;
     opacity: 1;
-    /* overflow: visible; Removido: Geralmente causa problemas de layout e não é necessário. */
-    /* padding: 0; Removido: O valor padrão já é zero, a não ser que haja herança. */
+    z-index: 10;
+    position: relative; /* NOVO: garante z-index */
 }
 
 /* ----------------------------------------------------- */
-/* Estilos do Conteúdo do Card (div.card) */
+/* CONTEÚDO DO CARD (div.card) */
 /* ----------------------------------------------------- */
 
 .card {
     width: 100%;
     height: 100%;
-
     background: #f3edf7;
     border-radius: 20px;
-    /* CORREÇÃO/OTIMIZAÇÃO: Shadow base. */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -74,20 +68,14 @@
     position: relative;
     z-index: 1;
     padding: 20px;
-
-    /* CORREÇÃO/OTIMIZAÇÃO: O card central tem um box-shadow mais forte. */
     transition: box-shadow 0.4s ease; 
 }
 
-/* Estilos adicionais para o card central (div.card dentro do a.center) */
+/* Card central destacado */
 .carousel-track a.center .card {
     background: #f3edf7;
-    /* CORREÇÃO/OTIMIZAÇÃO: Shadow de destaque para o centro. */
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4); 
-    
-    /* CORREÇÃO/OTIMIZAÇÃO: Garante que o card central fique por cima. */
     z-index: 10; 
-    
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -95,18 +83,20 @@
 }
 
 /* ----------------------------------------------------- */
-/* Estilos de Imagem e Título */
+/* IMAGEM E TÍTULO */
 /* ----------------------------------------------------- */
+
 .card h3 {
     margin-top: 10px;
     font-size: 1.2em;
     color: #333;
     font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .card img {
-    /* CORREÇÃO/OTIMIZAÇÃO: Ajuste a altura máxima para acomodar o <h3> 
-       e evitar o corte da imagem quando o card cresce. */
     max-height: calc(100% - 40px); 
     max-width: 100%;
     object-fit: contain;
@@ -121,25 +111,22 @@
 }
 
 /* ----------------------------------------------------- */
-/* Hover no link */
+/* HOVER EFFECTS */
 /* ----------------------------------------------------- */
+
 .carousel-track a:hover {
     cursor: pointer;
 }
 
 .carousel-track a:not(.center):hover {
-    /* CORREÇÃO/OTIMIZAÇÃO: Destaque sutil no hover dos cards laterais 
-       (que não estão no centro). */
     transform: scale(0.92);
     opacity: 0.85;
 }
 
 .carousel-track a:hover .card {
-    /* CORREÇÃO/OTIMIZAÇÃO: Apenas um box-shadow um pouco mais forte no hover */
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .carousel-track a.center:hover .card {
-    /* Aumentar o box-shadow sutilmente no hover do card central */
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5); 
 }
