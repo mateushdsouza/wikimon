@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <title>WIKIMON</title>
+
+  <link rel="stylesheet" href="styles/index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/header/Logo.png">
+</head>
+
+<body>
+  <header>
+    <a id="logo" href="#">
+      <img src="assets/header/Logo.png" alt="Pokebola escrito WIKIMON;">
+    </a>
+
+    <nav>
+
+      <button id="searchToggle" class="search-bar search-toggle-collapsed">
+        <img class="search-icon" src="assets/header/magnifying-glass.svg" alt="Icone de Pesquisa">
+        <input id="searchInput" class="search-input" type="text" placeholder="Pesquisar..." autocomplete="off" />
+      </button>
+
+      <div class="options">
+        <a href="">Comparar</a>
+        <a href="">Lista</a>
+        <a href="">Favoritos</a>
+      </div>
+      <button id="optionsToggle" class="options-toggle" style="display: none;">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </button>
+    </nav>
+
+    <div class="dropdown-menu">
+      <button id="accountToggle" class="account" aria-expanded="false" aria-controls="accountMenu">
+        <img src="assets/header/account.svg" alt="Icone de conta">
+      </button>
+
+      <div id="accountMenu" class="dropdown-content" role="menu" aria-labelledby="accountToggle">
+      </div>
+
+    </div>
+  </header>
+  <main>
+    <section class="list-section">
+      <div class="list-container">
+        <h1>Lista de Pokémons</h1>
+        <div class="pokemon-list" id="pokemonList">
+          <!-- Lista de Pokémons será carregada aqui -->
+        </div>
+        <button id="loadMoreBtn">Carregar mais</button>
+      </div>
+    </section>
+  </main>
+  <script src="scripts/dropdown-accountMenu.js"></script>
+  <script src="scripts/search-function.js"></script>
+  <script src="scripts/search-effect.js"></script>
+  <script src="../registerpage/scripts/storage.js"></script>
+</body>
+
+</html>
