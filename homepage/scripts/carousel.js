@@ -35,7 +35,7 @@ async function fetchPokemon(id, retries = 5) {
     
     try {
         const url = `https://pokeapi.co/api/v2/pokemon/${normalizedId}`;
-        console.log(`📡 Fazendo requisição para: ${url}`);
+        console.log(` Fazendo requisição para: ${url}`);
         
         const response = await fetch(url);
         
@@ -44,7 +44,7 @@ async function fetchPokemon(id, retries = 5) {
         }
         
         const pokemon = await response.json();
-        console.log(`✅ Dados recebidos:`, pokemon.name);
+        console.log(` Dados recebidos:`, pokemon.name);
         
         // Lista de URLs para tentar, em ordem de prioridade (APENAS IMAGENS GRANDES)
         const imageUrls = [];
@@ -69,18 +69,18 @@ async function fetchPokemon(id, retries = 5) {
         
         // Testa cada URL até encontrar uma que funcione
         for (const imageData of imageUrls) {
-            console.log(`🧪 Testando imagem: ${imageData.type}`);
+            console.log(` Testando imagem: ${imageData.type}`);
             const isValid = await validateImage(imageData.url);
             
             if (isValid) {
-                console.log(`✅ Imagem válida encontrada: ${imageData.type}`);
+                console.log(` Imagem válida encontrada: ${imageData.type}`);
                 return {
                     name: pokemon.name.toUpperCase(), // Sempre em maiúsculas
                     image: imageData.url,
                     id: normalizedId
                 };
             } else {
-                console.log(`❌ Imagem falhou: ${imageData.type}`);
+                console.log(` Imagem falhou: ${imageData.type}`);
             }
         }
         
@@ -88,11 +88,11 @@ async function fetchPokemon(id, retries = 5) {
         throw new Error('Nenhuma imagem válida encontrada');
         
     } catch (error) {
-        console.error(`❌ Erro ao buscar Pokémon ${normalizedId}:`, error.message);
+        console.error(` Erro ao buscar Pokémon ${normalizedId}:`, error.message);
         
         // Tenta outro Pokémon aleatório
         if (retries > 0) {
-            console.log(`🔄 Tentando outro Pokémon... (${retries} tentativas restantes)`);
+            console.log(` Tentando outro Pokémon... (${retries} tentativas restantes)`);
             await new Promise(resolve => setTimeout(resolve, 300));
             return fetchPokemon(getRandomPokemonId(), retries - 1);
         }
@@ -101,7 +101,7 @@ async function fetchPokemon(id, retries = 5) {
         const fallbackIds = [1, 4, 7, 25, 133, 152, 155, 158]; // Bulbasaur, Charmander, Squirtle, Pikachu, etc.
         const fallbackId = fallbackIds[Math.floor(Math.random() * fallbackIds.length)];
         
-        console.warn(`⚠️ Usando Pokémon fallback (ID: ${fallbackId})`);
+        console.warn(` Usando Pokémon fallback (ID: ${fallbackId})`);
         return fetchPokemon(fallbackId, 0); // Sem retry no fallback
     }
 }
@@ -130,8 +130,8 @@ function createCardElement(pokemon) {
 
 // Função principal para carregar os 4 Pokémon iniciais
 async function loadInitialPokemons() {
-    console.log('🚀 ===== INICIANDO CARROSSEL =====');
-    console.log(`📦 Carregando ${NUM_CARDS_IN_DOM} Pokémon iniciais...`);
+    console.log(' ===== INICIANDO CARROSSEL =====');
+    console.log(` Carregando ${NUM_CARDS_IN_DOM} Pokémon iniciais...`);
     
     try {
         pokemonData = [];
@@ -139,33 +139,33 @@ async function loadInitialPokemons() {
         for (let i = 0; i < NUM_CARDS_IN_DOM; i++) {
             const id = getRandomPokemonId();
             console.log(`\n--- Card ${i + 1}/${NUM_CARDS_IN_DOM} ---`);
-            console.log(`🎲 ID aleatório gerado: ${id}`);
+            console.log(` ID aleatório gerado: ${id}`);
             
             const pokemon = await fetchPokemon(id);
             pokemonData.push(pokemon);
             
-            console.log(`✅ Pokémon ${i + 1} adicionado:`, pokemon.name);
+            console.log(` Pokémon ${i + 1} adicionado:`, pokemon.name);
             
             const linkElement = createCardElement(pokemon);
             if (i === VISIBLE_CENTER_INDEX) {
                 linkElement.classList.add('center');
-                console.log(`⭐ Card ${i + 1} marcado como CENTER`);
+                console.log(` Card ${i + 1} marcado como CENTER`);
             }
             carouselTrack.appendChild(linkElement);
             
             // Delay menor entre requisições
             if (i < NUM_CARDS_IN_DOM - 1) {
-                console.log(`⏳ Aguardando 300ms antes do próximo Pokémon...`);
+                console.log(` Aguardando 300ms antes do próximo Pokémon...`);
                 await new Promise(resolve => setTimeout(resolve, 300));
             }
         }
 
         carouselTrack.style.transform = 'translateX(0)';
-        console.log('\n🎉 ===== CARROSSEL INICIALIZADO COM SUCESSO =====');
-        console.log('📊 Pokémon carregados:', pokemonData.map(p => `${p.name} (ID: ${p.id})`));
+        console.log('\n ===== CARROSSEL INICIALIZADO COM SUCESSO =====');
+        console.log(' Pokémon carregados:', pokemonData.map(p => `${p.name} (ID: ${p.id})`));
         
     } catch (error) {
-        console.error('💥 Erro fatal ao inicializar carrossel:', error);
+        console.error(' Erro fatal ao inicializar carrossel:', error);
     }
 }
 
@@ -174,7 +174,7 @@ async function rotateCarousel() {
     const links = document.querySelectorAll('.carousel-track a');
     
     if (links.length < 3) {
-        console.error('❌ Número insuficiente de cards no carrossel');
+        console.error(' Número insuficiente de cards no carrossel');
         return;
     }
     
@@ -197,7 +197,7 @@ async function rotateCarousel() {
     carouselTrack.style.transform = 'translateX(0)';
 
     try {
-        console.log('\n🔄 Carregando novo Pokémon para rotação...');
+        console.log('\n Carregando novo Pokémon para rotação...');
         const newPokemon = await fetchPokemon(getRandomPokemonId());
         const lastLink = carouselTrack.lastElementChild;
 
@@ -212,9 +212,9 @@ async function rotateCarousel() {
         lastLink.firstElementChild.dataset.pokemonId = newPokemon.id;
         lastLink.classList.remove('center');
         
-        console.log(`✅ Novo Pokémon carregado na rotação: ${newPokemon.name}`);
+        console.log(` Novo Pokémon carregado na rotação: ${newPokemon.name}`);
     } catch (error) {
-        console.error('❌ Erro ao carregar novo Pokémon na rotação:', error);
+        console.error(' Erro ao carregar novo Pokémon na rotação:', error);
     }
 
     setTimeout(() => {
@@ -225,32 +225,32 @@ async function rotateCarousel() {
 function startCarousel() {
     if (carouselIntervalId === null) {
         carouselIntervalId = setInterval(rotateCarousel, ROTATION_TIME);
-        console.log("▶️ Carrossel iniciado/retomado.");
+        console.log("▶ Carrossel iniciado/retomado.");
     }
 }
 
 function pauseCarousel() {
     clearInterval(carouselIntervalId);
     carouselIntervalId = null;
-    console.log("⏸️ Carrossel pausado.");
+    console.log("⏸ Carrossel pausado.");
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('📄 DOM carregado!');
+    console.log(' DOM carregado!');
     
     const container = document.querySelector('.carousel-container');
     
     if (!container) {
-        console.error('❌ Elemento .carousel-container não encontrado!');
+        console.error(' Elemento .carousel-container não encontrado!');
         return;
     }
     
     if (!carouselTrack) {
-        console.error('❌ Elemento .carousel-track não encontrado!');
+        console.error(' Elemento .carousel-track não encontrado!');
         return;
     }
     
-    console.log('✅ Elementos encontrados, iniciando carregamento...');
+    console.log(' Elementos encontrados, iniciando carregamento...');
     
     loadInitialPokemons().then(() => {
         startCarousel();
