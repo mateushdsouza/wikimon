@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <title>WIKIMON</title>
+
+  <link rel="stylesheet" href="styles/index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/header/Logo.png">
+</head>
+
+<body>
+  <header>
+    <a id="logo" href="../homepage/index.html">
+      <img src="assets/header/Logo.png" alt="Pokebola escrito WIKIMON;">
+    </a>
+
+    <nav>
+
+      <button id="searchToggle" class="search-bar search-toggle-collapsed">
+        <img class="search-icon" src="assets/header/magnifying-glass.svg" alt="Icone de Pesquisa">
+        <input id="searchInput" class="search-input" type="text" placeholder="Pesquisar..." autocomplete="off" />
+      </button>
+
+      <div class="options">
+        <a href="">Comparar</a>
+        <a href="../listapage/index.html">Lista</a>
+        <a href="">Favoritos</a>
+      </div>
+      <button id="optionsToggle" class="options-toggle" style="display: none;">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </button>
+    </nav>
+
+    <div class="dropdown-menu">
+      <button id="accountToggle" class="account" aria-expanded="false" aria-controls="accountMenu">
+        <img src="assets/header/account.svg" alt="Icone de conta">
+      </button>
+
+      <div id="accountMenu" class="dropdown-content" role="menu" aria-labelledby="accountToggle">
+      </div>
+
+    </div>
+  </header>
+  <main>
+    <div class="comp-main">
+      <div class="text-center">
+        <h2>Comparar Pokémons</h2>
+      </div>
+      <div class="comp-inputs">
+        <div class="inputs-row">
+          <input class="pokemon1" type="text" id="pokemon1" placeholder="Nome do primeiro Pokémon">
+          <input class="pokemon2" type="text" id="pokemon2" placeholder="Nome do segundo Pokémon">
+        </div>
+        <div class="cards-row">
+          <div class="poke1" id="comp1"></div>
+          <div class="poke2" id="comp2"></div>
+        </div>
+      </div>
+      <div class="button-comp">
+        <button id="compareButton">Comparar</button>
+      </div>
+    </div>
+    </div>
+    </div>
+
+  </main>
+
+  <script src="scripts/dropdown-accountMenu.js"></script>
+  <script src="scripts/search-effect.js"></script>
+  <script src="../registerpage/scripts/storage.js"></script>
+  <script src="scripts/comp.js"></script>
+</body>
+
+</html>
