@@ -20,7 +20,7 @@ formRegister.addEventListener("submit", (e) => {
         return;
     }
 
-    users.push({ username, password });
+    users.push({ username, password, favoritos: [] });
     localStorage.setItem("users", JSON.stringify(users));
 
     alert("Usuário registrado com sucesso!");

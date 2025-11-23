@@ -17,11 +17,12 @@
 
 <body>
   <header>
-    <a id="logo" href="index.html">
+    <a id="logo" href="../homepage/index.html">
       <img src="assets/header/Logo.png" alt="Pokebola escrito WIKIMON;">
     </a>
 
     <nav>
+
       <button id="searchToggle" class="search-bar search-toggle-collapsed">
         <img class="search-icon" src="assets/header/magnifying-glass.svg" alt="Icone de Pesquisa">
         <input id="searchInput" class="search-input" type="text" placeholder="Pesquisar..." autocomplete="off" />
@@ -32,7 +33,6 @@
         <a href="../listapage/listaPage.html">Lista</a>
         <a href="../favorito/favpage.html">Favoritos</a>
       </div>
-
       <button id="optionsToggle" class="options-toggle" style="display: none;">
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
       </button>
@@ -43,28 +43,27 @@
         <img src="assets/header/account.svg" alt="Icone de conta">
       </button>
 
-      <div id="accountMenu" class="dropdown-content" role="menu" aria-labelledby="accountToggle"></div>
+      <div id="accountMenu" class="dropdown-content" role="menu" aria-labelledby="accountToggle">
+      </div>
+
     </div>
   </header>
-
   <main>
-    <div class="carousel-container">
-      <div class="carousel-track"></div>
+    <div class="container">
+      <h2 class="text-center">Pokémons Favoritos</h2>
+      <div class="fav-list" id="lista">
+      </div>
     </div>
   </main>
 
-  <!-- MODAL -->
   <div id="modal" class="modal">
-    <div class="modal-content">
-      <span id="closeModal">&times;</span>
-      <div id="modalInfo"></div>
-    </div>
+  <div class="modal-content">
+    <span id="closeModal">&times;</span>
+    <div id="modalInfo"></div>
   </div>
+</div>
 
-  <!-- RESULTADO DA PESQUISA -->
-  <div class="pokesearch" id="resultadoId"></div>
-
-  <script src="scripts/carousel.js"></script>
+  <script src="scripts/fav.js"></script>
   <script src="scripts/dropdown-accountMenu.js"></script>
   <script src="scripts/search-effect.js"></script>
   <script src="../registerpage/scripts/storage.js"></script>
