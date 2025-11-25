@@ -27,20 +27,19 @@ function listar() {
 
           return `
             <div class="pokemon-card">
-              <div class="pokemon-image">
-                <img src="${staticImg}" alt="${data.name}" class="static">
-                <img src="${animatedImg || staticImg}" alt="${data.name}" class="animated">
-              </div>
-
-              <h3>${data.name.toUpperCase()}</h3>
+              <a class="pokemon-card-link" href="../detailPage/detailPage.html?id=${data.id}">
+                <div class="pokemon-image">
+                  <img src="${staticImg}" alt="${data.name}" class="static">
+                  <img src="${animatedImg || staticImg}" alt="${data.name}" class="animated">
+                </div>
+                <h3>${data.name.toUpperCase()}</h3>
+              </a>
 
               <div class="btn-group">
-                <button class="details-btn" data-name="${data.name}">Detalhes</button>
-
                 <button class="favorite-btn" data-name="${data.name}">
-                  ${favoritos.includes(data.id) ? "★" : "☆"}
+                  <span class="star">${favoritos.includes(data.id) ? "★" : "☆"}</span>
+                  <span class="fav-label">${favoritos.includes(data.id) ? "FAVORITO" : "FAVORITAR"}</span>
                 </button>
-
               </div>
             </div>
           `;
@@ -52,7 +51,6 @@ function listar() {
     .then(cards => {
       listaDiv.innerHTML = cards.join("");
       ativarFavoritar();
-      ativarDetalhes();
     })
     .catch(err => console.error(err));
 }
@@ -83,11 +81,17 @@ function favoritar(nome, botao) {
       if (jaFav) {
         // remove
         loggedUser.favoritos = loggedUser.favoritos.filter(id => id !== data.id);
-        botao.textContent = "☆"; // muda estrela
+        const starSpan = botao.querySelector('.star');
+        const labelSpan = botao.querySelector('.fav-label');
+        if (starSpan) starSpan.textContent = "☆"; else botao.textContent = "☆ FAVORITAR";
+        if (labelSpan) labelSpan.textContent = "FAVORITAR";
       } else {
         // adiciona
         loggedUser.favoritos.push(data.id);
-        botao.textContent = "★"; // muda estrela
+        const starSpan = botao.querySelector('.star');
+        const labelSpan = botao.querySelector('.fav-label');
+        if (starSpan) starSpan.textContent = "★"; else botao.textContent = "★ FAVORITO";
+        if (labelSpan) labelSpan.textContent = "FAVORITO";
       }
 
       // Atualiza lista geral de usuários
@@ -121,50 +125,7 @@ function ativarFavoritar() {
 
 // ---------------- DETALHES ---------------- //
 
-function ativarDetalhes() {
-  document.querySelectorAll(".details-btn").forEach(btn => {
-    btn.onclick = () => {
-      const nome = btn.getAttribute("data-name");
-
-      fetch(`https://pokeapi.co/api/v2/pokemon/${nome}`)
-        .then(res => res.json())
-        .then(data => {
-
-          const tipos = data.types
-            .map(t => t.type.name.toUpperCase())
-            .join(", ");
-
-          const habilidades = data.abilities
-            .map(a => a.ability.name.toUpperCase())
-            .join(", ");
-
-          const stats = data.stats
-            .map(s => `${s.stat.name.toUpperCase()}: ${s.base_stat}`)
-            .join("<br>");
-
-          document.getElementById("modalInfo").innerHTML = `
-            <h2>${data.name.toUpperCase()}</h2>
-            <img src="${data.sprites.other['official-artwork'].front_default}"
-                 width="150">
-
-            <p><b>Tipo(s):</b> ${tipos}</p>
-            <p><b>Altura:</b> ${data.height / 10} m</p>
-            <p><b>Peso:</b> ${data.weight / 10} kg</p>
-
-            <p><b>Habilidades:</b><br>${habilidades}</p>
-
-            <p><b>Stats:</b><br>${stats}</p>
-          `;
-
-          document.getElementById("modal").style.display = "flex";
-        });
-    };
-  });
-
-  document.getElementById("closeModal").onclick = () => {
-    document.getElementById("modal").style.display = "none";
-  };
-}
+// Detalhes via modal removidos — navegação acontece pelo link do card
 
 
 // ---------------- LOAD MORE ---------------- //

@@ -107,24 +107,71 @@ async function fetchPokemon(id, retries = 5) {
 }
 
 // Função para criar o elemento card HTML
+// Helpers de favoritos
+function getLoggedUser() {
+    return JSON.parse(localStorage.getItem('loggedUser'));
+}
+function isFavorito(id) {
+    const user = getLoggedUser();
+    const favs = user?.favoritos || [];
+    return favs.includes(id);
+}
+function toggleFavorito(id, button) {
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    let user = getLoggedUser();
+    if (!user) return;
+    if (!Array.isArray(user.favoritos)) user.favoritos = [];
+    const jaFav = user.favoritos.includes(id);
+    if (jaFav) {
+        user.favoritos = user.favoritos.filter(f => f !== id);
+    } else {
+        user.favoritos.push(id);
+    }
+    const star = button.querySelector('.star');
+    const label = button.querySelector('.fav-label');
+    if (star) star.textContent = jaFav ? '☆' : '★';
+    if (label) label.textContent = jaFav ? 'FAVORITAR' : 'FAVORITO';
+    const updatedUsers = users.map(u => u.username === user.username ? user : u);
+    localStorage.setItem('loggedUser', JSON.stringify(user));
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
+}
+
+function bindFavoriteButtons(scope = document) {
+    scope.querySelectorAll('.favorite-btn').forEach(btn => {
+        btn.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const id = Number(btn.getAttribute('data-id'));
+            toggleFavorito(id, btn);
+        };
+    });
+}
+
 function createCardElement(pokemon) {
     const link = document.createElement('a');
-    link.href = `pokemon-details.html?id=${pokemon.id}`;
+    link.href = `../detailPage/detailPage.html?id=${pokemon.id}`;
     
     const card = document.createElement('div');
     card.classList.add('card');
     card.dataset.pokemonId = pokemon.id;
     
     // Adiciona loading="eager" para os 4 iniciais carregarem rápido
+    const favStar = isFavorito(pokemon.id) ? '★' : '☆';
+    const favLabel = isFavorito(pokemon.id) ? 'FAVORITO' : 'FAVORITAR';
     card.innerHTML = `
         <img src="${pokemon.image}" 
              alt="${pokemon.name}"
              loading="eager"
              crossorigin="anonymous">
         <h3>${pokemon.name}</h3>
+        <button class="favorite-btn" data-id="${pokemon.id}" aria-label="Favoritar ${pokemon.name}">
+          <span class="star">${favStar}</span>
+          <span class="fav-label">${favLabel}</span>
+        </button>
     `;
     
     link.appendChild(card);
+    bindFavoriteButtons(card);
     return link;
 }
 
@@ -201,15 +248,25 @@ async function rotateCarousel() {
         const newPokemon = await fetchPokemon(getRandomPokemonId());
         const lastLink = carouselTrack.lastElementChild;
 
-        lastLink.href = `pokemon-details.html?id=${newPokemon.id}`;
+        lastLink.href = `../detailPage/detailPage.html?id=${newPokemon.id}`;
         
         const img = lastLink.querySelector('img');
         const h3 = lastLink.querySelector('h3');
+        const favBtn = lastLink.querySelector('.favorite-btn');
         
         img.src = newPokemon.image;
         img.alt = newPokemon.name;
         h3.textContent = newPokemon.name;
         lastLink.firstElementChild.dataset.pokemonId = newPokemon.id;
+        if (favBtn) {
+            favBtn.setAttribute('data-id', newPokemon.id);
+            const star = favBtn.querySelector('.star');
+            const label = favBtn.querySelector('.fav-label');
+            const favStar = isFavorito(newPokemon.id) ? '★' : '☆';
+            const favLabel = isFavorito(newPokemon.id) ? 'FAVORITO' : 'FAVORITAR';
+            if (star) star.textContent = favStar;
+            if (label) label.textContent = favLabel;
+        }
         lastLink.classList.remove('center');
         
         console.log(` Novo Pokémon carregado na rotação: ${newPokemon.name}`);
@@ -249,6 +306,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error(' Elemento .carousel-track não encontrado!');
         return;
     }
+
+    bindFavoriteButtons();
     
     console.log(' Elementos encontrados, iniciando carregamento...');
     

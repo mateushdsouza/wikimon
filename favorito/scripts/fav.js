@@ -18,66 +18,67 @@ function mostrarFavoritos() {
   Promise.all(promises)
     .then(pokemons => {
       pokemons.forEach(data => {
+        const favStar = isFavorito(data.id) ? '★' : '☆';
+        const favLabel = isFavorito(data.id) ? 'FAVORITO' : 'FAVORITAR';
         listaDiv.innerHTML += `
           <div class="pokemon-card">  
-            <h2>${data.name.toUpperCase()}</h2>
-            <img src="${data.sprites.front_default}" alt="${data.name}">
+            <a class="pokemon-card-link" href="../detailPage/detailPage.html?id=${data.id}">
+              <h2>${data.name.toUpperCase()}</h2>
+              <img src="${data.sprites.front_default}" alt="${data.name}">
+            </a>
 
-            <button class="details-btn" data-name="${data.name}">
-              Detalhes
+            <button class="favorite-btn" data-id="${data.id}" aria-label="Favoritar ${data.name}">
+              <span class="star">${favStar}</span>
+              <span class="fav-label">${favLabel}</span>
             </button>
           </div>
         `;
       });
-
-      ativarDetalhes();
+      ativarFavoritar();
     });
 }
 
 window.onload = mostrarFavoritos;
 
-function ativarDetalhes() {
-  document.querySelectorAll(".details-btn").forEach(btn => {
-    btn.onclick = () => {
-      const nome = btn.getAttribute("data-name");
+// Favoritos helpers
+function getLoggedUser() {
+  return JSON.parse(localStorage.getItem('loggedUser'));
+}
+function isFavorito(id) {
+  const user = getLoggedUser();
+  const favs = user?.favoritos || [];
+  return favs.includes(id);
+}
+function toggleFavorito(id, button) {
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  let user = getLoggedUser();
+  if (!user) return;
+  if (!Array.isArray(user.favoritos)) user.favoritos = [];
+  const jaFav = user.favoritos.includes(id);
+  if (jaFav) {
+    user.favoritos = user.favoritos.filter(f => f !== id);
+  } else {
+    user.favoritos.push(id);
+  }
+  const star = button.querySelector('.star');
+  const label = button.querySelector('.fav-label');
+  if (star) star.textContent = jaFav ? '☆' : '★';
+  if (label) label.textContent = jaFav ? 'FAVORITAR' : 'FAVORITO';
+  const updatedUsers = users.map(u => u.username === user.username ? user : u);
+  localStorage.setItem('loggedUser', JSON.stringify(user));
+  localStorage.setItem('users', JSON.stringify(updatedUsers));
+  // Atualiza a listagem para refletir remoção
+  mostrarFavoritos();
+}
 
-      fetch(`https://pokeapi.co/api/v2/pokemon/${nome}`)
-        .then(res => res.json())
-        .then(data => {
-
-          const tipos = data.types
-            .map(t => t.type.name.toUpperCase())
-            .join(", ");
-
-          const habilidades = data.abilities
-            .map(a => a.ability.name.toUpperCase())
-            .join(", ");
-
-          const stats = data.stats
-            .map(s => `${s.stat.name.toUpperCase()}: ${s.base_stat}`)
-            .join("<br>");
-
-          document.getElementById("modalInfo").innerHTML = `
-            <h2>${data.name.toUpperCase()}</h2>
-            <img src="${data.sprites.other['official-artwork'].front_default}"
-                 width="150">
-
-            <p><b>Tipo(s):</b> ${tipos}</p>
-            <p><b>Altura:</b> ${data.height / 10} m</p>
-            <p><b>Peso:</b> ${data.weight / 10} kg</p>
-
-            <p><b>Habilidades:</b><br>${habilidades}</p>
-
-            <p><b>Stats:</b><br>${stats}</p>
-          `;
-
-          document.getElementById("modal").style.display = "flex";
-        });
+function ativarFavoritar() {
+  document.querySelectorAll('.favorite-btn').forEach(btn => {
+    btn.onclick = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const id = Number(btn.getAttribute('data-id'));
+      toggleFavorito(id, btn);
     };
   });
-
-  document.getElementById("closeModal").onclick = () => {
-    document.getElementById("modal").style.display = "none";
-  };
 }
 

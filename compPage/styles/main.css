@@ -145,6 +145,26 @@ main {
     color: white;
 }
 
+/* Botão de Favoritar nos cards do carrossel */
+.favorite-btn {
+    background-color: #6C63FF;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+.favorite-btn:hover { background-color: #574fd6; }
+.favorite-btn .star { font-size: 18px; line-height: 1; }
+.favorite-btn .fav-label { letter-spacing: .5px; }
 
 
 

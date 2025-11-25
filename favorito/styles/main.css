@@ -62,7 +62,8 @@ main {}
     transition: opacity 0.3s ease;
 }
 
-.details-btn{
+/* Botão FAVORITAR/FAVORITO */
+.favorite-btn{
     background-color: #6C63FF;
     color: white;
     border: none;
@@ -73,42 +74,11 @@ main {}
     font-weight: bold;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     transition: background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
 }
-
-.details-btn:hover{
-    background-color: #574fd6;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.7);
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.modal-content {
-  background: #fff;
-  padding: 20px;
-  border-radius: 15px;
-  width: 350px;
-  max-height: 80vh;
-  overflow-y: auto;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
-
-#closeModal {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  cursor: pointer;
-  font-size: 26px;
-  font-weight: bold;
-}
+.favorite-btn:hover{ background-color: #574fd6; }
+.favorite-btn .star{ font-size: 18px; line-height: 1; }
+.favorite-btn .fav-label{ letter-spacing: .5px; }
