@@ -64,26 +64,8 @@ document.addEventListener('DOMContentLoaded', function () {
 // FUNÇÃO DE BUSCA
 // ==============================
 function buscarPokemonGenerico(searchInput, resultadoId) {
-  const nome = document.getElementById(searchInput).value.toLowerCase();
-  const url = `https://pokeapi.co/api/v2/pokemon/${nome}/`;
-
-  fetch(url)
-    .then(res => {
-      if (!res.ok) throw new Error("Pokémon não encontrado!");
-      return res.json();
-    })
-    .then(data => {
-      document.getElementById(resultadoId).innerHTML = `
-        <div class="pokemon-comp">
-          <h2>${data.name.toUpperCase()}</h2> 
-          <img src="${data.sprites.other['official-artwork'].front_default}" alt="${data.name}">
-          <p><b>Altura:</b> ${data.height}</p>
-          <p><b>Peso:</b> ${data.weight}</p>
-          <p><b>Habilidades:</b> ${data.abilities.map(a => a.ability.name).join(", ")}</p>
-        </div>
-      `;
-    })
-    .catch(err => {
-      document.getElementById(resultadoId).innerHTML = `<p style="color:red;">${err.message}</p>`;
-    });
+  const inputEl = document.getElementById(searchInput);
+  const query = (inputEl.value || "").trim().toLowerCase();
+  if (!query) return;
+  window.location.href = `../searchpage/search.html?q=${encodeURIComponent(query)}`;
 }

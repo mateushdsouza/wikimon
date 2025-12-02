@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultados da Pesquisa</title>
+  <link rel="stylesheet" href="../homepage/styles/index.css">
+  <link rel="stylesheet" href="../listapage/styles/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../homepage/assets/header/Logo.png">
+</head>
+<body>
+  <header>
+    <a id="logo" href="../homepage/index.html">
+      <img src="../homepage/assets/header/Logo.png" alt="Pokebola escrito WIKIMON;">
+    </a>
+    <nav>
+      <button id="searchToggle" class="search-bar search-toggle-collapsed">
+        <img class="search-icon" src="../homepage/assets/header/magnifying-glass.svg" alt="Icone de Pesquisa">
+        <input id="searchInput" class="search-input" type="text" placeholder="Pesquisar..." autocomplete="off" />
+      </button>
+      <div class="options">
+        <a href="../compPage/compPage.html">Comparar</a>
+        <a href="../listapage/listaPage.html">Lista</a>
+        <a href="../favorito/favpage.html">Favoritos</a>
+      </div>
+      <button id="optionsToggle" class="options-toggle" style="display: none;">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </button>
+    </nav>
+    <div class="dropdown-menu">
+      <button id="accountToggle" class="account" aria-expanded="false" aria-controls="accountMenu">
+        <img src="../homepage/assets/header/account.svg" alt="Icone de conta">
+      </button>
+      <div id="accountMenu" class="dropdown-content" role="menu" aria-labelledby="accountToggle"></div>
+    </div>
+  </header>
+  <main>
+    <section style="max-width: 1000px; margin: 30px auto;">
+      <h1 style="font-family: Montserrat, sans-serif; font-weight: 700; letter-spacing: 1px;">Resultados</h1>
+      <div id="searchResults" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-top: 20px;"></div>
+    </section>
+  </main>
+  <script src="../homepage/scripts/dropdown-accountMenu.js"></script>
+  <script src="../homepage/scripts/search-effect.js"></script>
+  <script src="scripts/search.js"></script>
+</body>
+</html>
