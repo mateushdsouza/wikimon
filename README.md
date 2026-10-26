@@ -1,32 +1,44 @@
-# 🐾 Wikimon
+# Wikimon
 
-**Wikimon** é uma enciclopédia interativa inspirada na Wikipedia, criada especialmente para fãs de Pokémon! Aqui você encontra informações detalhadas sobre cada Pokémon: suas características, habilidades, evoluções e muito mais — tudo em um só lugar.
+Projeto acadêmico de uma enciclopédia Pokémon, desenvolvido em HTML, CSS e JavaScript com dados da [PokéAPI](https://pokeapi.co/).
 
----
+## Funcionalidades presentes no código
 
-## ✨ Funcionalidades
+- Busca por início do nome, com até 20 resultados na página de pesquisa.
+- Listagem e páginas de detalhes dos Pokémon.
+- Comparação de atributos entre dois Pokémon.
+- Favoritos associados ao usuário da demonstração local.
+- Telas de cadastro e login com armazenamento no navegador.
 
-- 🔍 Pesquisa rápida por nome, tipo ou número do Pokédex  
-- 📄 Páginas detalhadas com stats, habilidades e histórico de cada Pokémon  
-- 📱 Interface responsiva para desktop e dispositivos móveis  
----
+## Como executar
 
-## 🛠️ Tecnologias utilizadas
+```sh
+git clone https://github.com/mateushdsouza/wikimon.git
+cd wikimon
+```
 
-- **HTML, CSS e JavaScript**  
-- [API PokéAPI](https://pokeapi.com)
----
+Sirva **a raiz do repositório** com um servidor estático, como a extensão Live Server do VS Code. Abra `/homepage/index.html` no endereço local fornecido. Não há `index.html` na raiz. Algumas rotas começam com `/`, portanto hospedar diretamente em um subdiretório exige ajustar esses caminhos.
 
-## 🚀 Como executar localmente
+É necessário acesso à internet para consultar a PokéAPI e carregar recursos externos.
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seuusuario/wikimon.git
-   
-2. Abra o arquivo index.html no seu navegador.
-3. Explore o Wikimon e descubra tudo sobre seus Pokémon favoritos!
+## Organização
 
-📚 Sobre o projeto
-Este projeto foi desenvolvido como parte de uma disciplina da faculdade para demonstrar habilidades em desenvolvimento web, organização de dados e criação de interfaces amigáveis. É uma forma prática de unir paixão por Pokémon com aprendizado tecnológico.
+- [homepage/](homepage/): página inicial.
+- [listapage/](listapage/): catálogo.
+- [searchpage/](searchpage/): pesquisa.
+- [detailPage/](detailPage/): ficha do Pokémon.
+- [compPage/](compPage/): comparação.
+- [favorito/](favorito/): favoritos.
+- [loginpage/](loginpage/) e [registerpage/](registerpage/): demonstração de conta local.
 
-Link do figma: https://www.figma.com/design/iKTkCZqIRtZ497VtETy3nv/wikimon?node-id=0-1&t=jGY4APEfOSzzwaLH-1
+## Limitações
+
+O login **não é autenticação segura de produção**. Usuários e senhas ficam em texto no localStorage; use apenas dados fictícios e nunca senhas reais. Não há servidor de autenticação ou sincronização entre dispositivos. Limpar os dados do navegador apaga as contas e os favoritos locais.
+
+A pesquisa atual filtra nomes; não deve ser apresentada como busca completa por tipo ou número. Consultas dependem da disponibilidade da PokéAPI. A revisão da documentação não equivale a uma validação completa de todos os fluxos da aplicação.
+
+## Aprendizado e créditos
+
+Consumo de API com Fetch, manipulação do DOM, operações assíncronas, comparação de dados e persistência local para fins didáticos.
+
+[Protótipo no Figma](https://www.figma.com/design/iKTkCZqIRtZ497VtETy3nv/wikimon?node-id=0-1). Pokémon e suas imagens pertencem aos respectivos titulares. A autoria das contribuições permanece registrada no histórico do repositório.
