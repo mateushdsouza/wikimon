@@ -24,6 +24,6 @@ formRegister.addEventListener("submit", (e) => {
     localStorage.setItem("users", JSON.stringify(users));
 
     alert("Usuário registrado com sucesso!");
-    window.location.href = "/loginpage/login.html";
+    window.location.href = "../loginpage/login.html";
 
 });

@@ -1,5 +1,12 @@
 # Wikimon
 
+## Acessar no navegador
+
+**[Abrir o projeto](https://mateushdsouza.github.io/wikimon/)**
+
+Não é necessário clonar o repositório, instalar ferramentas ou baixar arquivos para visualizar a versão publicada.
+
+
 Projeto acadêmico de uma enciclopédia Pokémon, desenvolvido em HTML, CSS e JavaScript com dados da [PokéAPI](https://pokeapi.co/).
 
 ## Funcionalidades presentes no código
@@ -10,14 +17,14 @@ Projeto acadêmico de uma enciclopédia Pokémon, desenvolvido em HTML, CSS e Ja
 - Favoritos associados ao usuário da demonstração local.
 - Telas de cadastro e login com armazenamento no navegador.
 
-## Como executar
+## Desenvolvimento local (opcional)
 
 ```sh
 git clone https://github.com/mateushdsouza/wikimon.git
 cd wikimon
 ```
 
-Sirva **a raiz do repositório** com um servidor estático, como a extensão Live Server do VS Code. Abra `/homepage/index.html` no endereço local fornecido. Não há `index.html` na raiz. Algumas rotas começam com `/`, portanto hospedar diretamente em um subdiretório exige ajustar esses caminhos.
+Sirva **a raiz do repositório** com um servidor estático, como a extensão Live Server do VS Code. Abra `/homepage/index.html` no endereço local fornecido. A página `index.html` da raiz encaminha para a página inicial. Os caminhos de navegação são relativos para funcionar também no subdiretório do GitHub Pages.
 
 É necessário acesso à internet para consultar a PokéAPI e carregar recursos externos.
 
